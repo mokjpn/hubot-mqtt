@@ -12,7 +12,7 @@ For TLS against the mqtt server:
 # export HUBOT_MQTT_CA_CERT='/etc/ssl/certs/mosquitto.org.crt'
 ```
 
-For a custom mosquitto server with client cert authentication you'll want
+For a custom mosquitto server with client cert authentication you'll want (and obviously change them to your mqtt server)
 ```
 export HUBOT_MQTT_HOST='mqtt.hq.thebikeshed.io'
 export HUBOT_MQTT_URL='mqtts://mqtt.hq.thebikeshed.io'
