@@ -1,0 +1,31 @@
+(
+  cd /var/cache/git
+  git clone https://github.com/OpenVPN/easy-rsa
+  cd easy-rsa/easyrsa3
+  ./easyrsa init-pki
+  ./easyrsa build-ca
+)
+
+(
+ cd /var/cache/git/easy-rsa/easyrsa3
+
+
+# create the mosquitto server cert
+
+./easyrsa gen-req mqtt.hq.thebikeshed.io
+./easyrsa sign-req server mqtt.hq.thebikeshed.io
+openssl rsa -in mqtt.hq.thebikeshed.io.key -out mqtt.hq.thebikeshed.io.ckey
+
+# create a client cert
+./easyrsa gen-req tyr.hq.thebikeshed.io
+./easyrsa sign-req client tyr.hq.thebikeshed.io
+openssl rsa -in tyr.hq.thebikeshed.io.key -out tyr.hq.thebikeshed.io.ckey
+
+# create another client cert
+./easyrsa gen-req planck.hq.thebikeshed.io
+./easyrsa sign-req client planck.hq.thebikeshed.io
+openssl rsa -in planck.hq.thebikeshed.io.key -out planck.hq.thebikeshed.io.ckey
+
+)
+
+symlink the host cert/ckey to localhost.crt / localhost.ckey in the appropriate directories
